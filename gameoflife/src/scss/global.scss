@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-transition: background-color 5000s ease-in-out 0s;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+//mobile
+@media only screen and (min-width: 0px) and (max-width: 600px) {
+}
+//tablet
+@media only screen and (min-width: 600px) and (max-width: 1200px) {
+}
+//desktop
+@media only screen and (min-width: 1201px) {
+}

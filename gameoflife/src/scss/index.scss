@@ -1,0 +1,17 @@
+@import "global";
+
+body {
+  overflow-x: hidden !important;
+  height: 100vh;
+  margin: 0;
+  font-family: "VT323", monospace;
+  background: rgb(49, 49, 49);
+}
+
+@media only screen and (min-width: 1201px) {
+  html,
+  body {
+    overflow-x: hidden !important;
+    overflow-y: hidden;
+  }
+}
