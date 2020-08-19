@@ -1,68 +1,41 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Welcome to Conway's Game of Life
 
-## Available Scripts
+## Rules
 
-In the project directory, you can run:
+1. Any live cell with two or three live neighbours survives.
 
-### `yarn start`
+2. Any dead cell with three live neighbours becomes a live cell.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+3. All other live cells die in the next generation. Similarly, all other dead cells stay dead.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Building the App
 
-### `yarn test`
+### The main entry point of the application houses the visualization of this cellular automaton. This includes necessary components, such as
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Grid to display cells.
+2. Cell objects or components that, at a minimum, should have:
+   - Properties
+     - current state: (alive, dead), (black, white)
+     - Clickable/Tappable:
+       - can be clicked to allow user to setup initial cell configuration
+       - should NOT be clickable while simulation is running
+     - Behaviors
+       - Toggle state functionality: switch between alive & dead either because user manually toggled cell before starting simulation or simulation is 2. running and rules of life caused cell to change state
+3. An appropriate data structure to hold a grid of cells that is at least 25x25. Go as big as you want.
+4. Text to display current generation # being displayed
+   - Utilize a timeout function to build the next generation of cells & update the display at the chosen time interval
+5. Button(s) that start & stop the animation
+6. Button to clear the grid
 
-### `yarn build`
+### Using an algorithm that
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+1. Implements the following basic steps:
+   - For each cell in the current generation's grid:
+     - Examine state of all eight neighbors (it's up to you whether you want cells to wrap around the grid and consider cells on the other side or not)
+     - Apply rules of life to determine if this cell will change states
+     - When main loop completes:
+       - Swap current and next grids
+       - Repeat until simulation stopped
+2. Breaks down above steps into appropriate sub-tasks implemented with helper functions to improve readability
+3. Uses double buffering to update grid with next generation.
+4. Does something well-documented with the edge of the grid. (e.g. wrap around to the far side--most fun!--or assumes all edge cells are permanently dead.)
