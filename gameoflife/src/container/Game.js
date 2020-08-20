@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import $ from "jquery";
 // components
 import Header from "./components/Header";
 import Grid from "./components/Grid";
@@ -14,7 +14,7 @@ class Game extends Component {
     this.state = {
       savedGrids: [],
       saveGridName: "",
-      selectionLocation: null,
+      setSelection: null,
       cycles: 50,
       currentCycle: 50,
       speed: 5,
@@ -76,8 +76,8 @@ class Game extends Component {
   };
 
   setSelection = (e) => {
-    this.setState({ selectionLocation: e.target.value }, () =>
-      console.log(this.state.selectionLocation)
+    this.setState({ setSelection: e.target.value }, () =>
+      console.log(this.state.setSelection)
     );
   };
 
@@ -121,11 +121,11 @@ class Game extends Component {
       alert("Game must be paused before loading grid");
       return;
     } else {
-      console.log(this.state.selectionLocation);
+      console.log(this.state.setSelection);
       this.setState((prevState, props) => {
-        const selectGrid = prevState.selectionLocation;
-        const selectedGrid = prevState.savedGrids[selectGrid];
-        return { currentGrid: selectedGrid.grid };
+        const selectGrid = prevState.setSelection;
+        console.log(selectGrid);
+        return { currentGrid: selectGrid.grid };
       });
     }
   };
@@ -177,9 +177,10 @@ class Game extends Component {
       startGame: this.start,
       pauseGame: this.pause,
       resetGame: this.resetGame,
-      loadGrid: this.loadSaved,
+      loadSaved: this.loadSaved,
       saveGrid: this.saveGrid,
       clearSaved: this.clearSaved,
+      toggleModal: this.toggleModal,
     };
 
     return (
@@ -188,27 +189,24 @@ class Game extends Component {
         onMouseDown={this.mouseDown}
         onMouseUp={this.mouseUp}
       >
-        <div className="one">
+        <div className="left">
           <Grid
             grid={this.state.currentGrid}
             toggle={this.toggleCell}
             mouseOver={this.mouseOver}
           />
         </div>
-        <div className="two">
+        <div className="right">
           <Header settingsCallback={this.settingsCallback} />
-          <div className="modal-toggle-wrapper">
-            <button>Settings</button>
-          </div>
+          <Settings
+            settings={this.settingsCallback}
+            cycleCount={this.state.cycles}
+            saveGridAs={this.state.saveGridName}
+            savedGrids={this.state.savedGrids}
+            cycles={this.state.cycles}
+            callBacks={controls}
+          />
         </div>
-        <Settings
-          settings={this.settingsCallback}
-          cycleCount={this.state.cycles}
-          saveGridAs={this.state.saveGridName}
-          savedGrids={this.state.savedGrids}
-          cycles={this.state.cycles}
-          callBacks={controls}
-        />
       </div>
     );
   }
