@@ -31,52 +31,56 @@ const Settings = (props) => {
   options.unshift(defaultOption);
   return (
     <nav className="settings-wrapper">
-      <label htmlFor="cycles">Cycles: </label>
-      <input
-        type="number"
-        className="setting"
-        name="cycles"
-        onChange={cycles}
-        value={cycleValue}
-      />
+      <div className="top">
+        <div className="setting-wrapper">
+          <label htmlFor="cycles">Cycles: </label>
+          <input
+            type="number"
+            className="setting"
+            name="cycles"
+            onChange={cycles}
+            value={cycleValue}
+          />
+        </div>
+        <div className="setting-wrapper">
+          <label htmlFor="saved-grid">Choose a saved layout</label>
+          <select className="setting" name="saved-grid" onChange={setSelection}>
+            {options}
+          </select>
+          <button className="setting btn" onClick={loadSaved}>
+            Load
+          </button>
+        </div>
 
-      <button className="setting btn" onClick={startGame}>
-        Start
-      </button>
-      <button className="setting btn" onClick={pauseGame}>
-        Pause
-      </button>
+        <div className="setting-wrapper">
+          <label htmlFor="save-grid-name">Layout Name: </label>
+          <input
+            type="text"
+            className="setting"
+            name="save-grid-name"
+            value={saveGridAsValue}
+            onChange={saveGridAs}
+          />
+          <button className="setting btn" onClick={saveGrid}>
+            Save
+          </button>
+          <button className="setting btn" onClick={clearSaved}>
+            Clear Saved Layouts
+          </button>
+        </div>
+      </div>
+      <div className="bottom">
+        <button className="setting btn" onClick={startGame}>
+          Start
+        </button>
+        <button className="setting btn" onClick={pauseGame}>
+          Pause
+        </button>
 
-      <button className="setting btn" onClick={resetGame}>
-        Reset
-      </button>
-
-      <label htmlFor="saved-grid">Choose a saved layout</label>
-      <select className="setting" name="saved-grid" onChange={setSelection}>
-        {options}
-      </select>
-      <button className="setting btn" onClick={loadSaved}>
-        Load
-      </button>
-
-      <label htmlFor="save-grid-name">Layout Name: </label>
-      <input
-        type="text"
-        className="setting"
-        name="save-grid-name"
-        value={saveGridAsValue}
-        onChange={saveGridAs}
-      />
-      <button className="setting btn" onClick={saveGrid}>
-        Save
-      </button>
-      <label htmlFor="clear">Clear Saved Layouts</label>
-      <input
-        type="button"
-        className="setting"
-        name="clear"
-        onClick={clearSaved}
-      />
+        <button className="setting btn" onClick={resetGame}>
+          Reset
+        </button>
+      </div>
     </nav>
   );
 };

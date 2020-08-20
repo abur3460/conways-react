@@ -50,7 +50,9 @@ input:-webkit-autofill:active {
         }
 
         .awake {
-          background-color: red;
+          background: linear-gradient(90deg, #3a6186, #89253e);
+          background-attachment: fixed;
+          background-size: 50%;
         }
 
         .asleep {
@@ -62,8 +64,8 @@ input:-webkit-autofill:active {
       width: 50%;
       height: 100%;
       .header-wrapper {
+        width: 80%;
         display: flex;
-        margin: 2rem auto;
         align-items: center;
         flex-direction: column;
         .img {
@@ -77,25 +79,34 @@ input:-webkit-autofill:active {
           font-size: 3rem;
         }
       }
-    }
-    .settings-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 80%;
-      background: rgb(22, 22, 22);
-      color: white;
-      position: relative;
-      padding: 4rem 1rem 5rem 1rem;
-      .exit {
-        cursor: pointer;
-        right: 1rem;
-        top: 1rem;
-        font-size: 2rem;
-        position: absolute;
+      .bottom {
+        display: flex;
+        margin: 5rem auto;
+        button {
+          margin: 1rem;
+        }
       }
-      .setting {
-        width: 50%;
+      .settings-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-content: center;
+        align-items: center;
+        width: 80%;
+        height: 40vh;
+        background: rgb(22, 22, 22);
+        color: white;
+        position: relative;
+        .setting-wrapper {
+          margin: 2rem auto;
+          display: flex;
+          justify-content: center;
+          width: 80%;
+          label {
+            white-space: nowrap;
+            margin-top: 1rem;
+          }
+        }
       }
     }
   }
