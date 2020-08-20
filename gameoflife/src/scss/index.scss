@@ -1,9 +1,13 @@
 @import "global";
 
-body {
-  overflow-x: hidden !important;
-  height: 100vh;
+html,
+body,
+#root,
+.App {
   margin: 0;
+  padding: 0;
+  height: 100vh;
+  box-sizing: border-box;
   font-family: "VT323", monospace;
   background: rgb(49, 49, 49);
 }

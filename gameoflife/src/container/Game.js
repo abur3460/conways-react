@@ -2,27 +2,25 @@ import React, { Component } from "react";
 
 // components
 import Header from "./components/Header";
-import Controls from "./components/Controls";
 import Grid from "./components/Grid";
-import Modal from "./components/Modal";
-import life from "./models/life";
+import Settings from "./components/Settings";
+import { genBlankGrid, genNextGrid } from "./models/life.js";
 
 class Game extends Component {
   constructor(props) {
     super(props);
-
-    const startGrid = life.genBlankGrid();
+    const startGrid = genBlankGrid();
 
     this.state = {
       savedGrids: [],
       saveGridName: "",
       selectionLocation: null,
       cycles: 50,
+      currentCycle: 50,
+      speed: 5,
       currentGrid: startGrid,
       play: false,
       mouseDown: false,
-      about: false,
-      rules: false,
       settings: false,
     };
   }
@@ -38,8 +36,11 @@ class Game extends Component {
     console.time("renderNewGrid");
     this.setState(
       (prevState, props) => {
-        const newGrid = life.genNextGrid(prevState.currentGrid);
-        return { currentGrid: newGrid };
+        const newGrid = genNextGrid(prevState.currentGrid);
+        return {
+          currentGrid: newGrid,
+          cycleCounter: this.state.currentCycle - 1,
+        };
       },
       () => console.timeEnd("renderNewGrid")
     );
@@ -59,7 +60,7 @@ class Game extends Component {
   };
 
   mouseOver = (row, column) => () => {
-    if (this.state.mouseDown) this.toggle(row, column)();
+    if (this.state.mouseDown) this.toggleCell(row, column)();
   };
 
   mouseDown = () => {
@@ -71,7 +72,7 @@ class Game extends Component {
   };
 
   setCycle = (e) => {
-    this.setState({ cycles: e.target.value });
+    this.setState({ cycles: e.target.value, currentCycle: e.target.value });
   };
 
   setSelection = (e) => {
@@ -86,19 +87,21 @@ class Game extends Component {
 
   start = () => {
     console.log("Starting game...");
-    this.setState({ play: true });
+    this.setState({ play: true, cycleCounter: this.state.cycles });
     const id = setInterval(() => {
-      console.log("lifecycles: ", this.state.cycles);
+      console.log("lifecycle: ", this.state.cycleCounter);
       console.time("cycle");
-      if (this.state.cycles > 0 && this.state.play == true) {
-        this.cycle();
-        const newCycles = this.state.cycles - 1;
-        this.setState({ cycles: newCycles }, () => console.timeEnd("cycle"));
+      if (this.state.cycleCounter > 0 && this.state.play === true) {
+        this.lifecycle();
+        const newCycles = this.state.cycleCounter;
+        this.setState({ currentCycle: newCycles }, () =>
+          console.timeEnd("cycle")
+        );
       } else {
         if (this.state.play === true) this.setState({ play: false });
         clearInterval(id);
       }
-    }, 500);
+    }, this.state.speed);
   };
 
   pause = () => {
@@ -106,11 +109,15 @@ class Game extends Component {
   };
 
   resetGame = () => {
-    this.setState({ play: false, currentGrid: life.genBlankGrid() });
+    this.setState({
+      play: false,
+      currentGrid: genBlankGrid(),
+      currentCycle: this.state.cycles,
+    });
   };
 
   loadSaved = () => {
-    if (this.state.play == true) {
+    if (this.state.play === true) {
       alert("Game must be paused before loading grid");
       return;
     } else {
@@ -128,20 +135,31 @@ class Game extends Component {
       alert("Game must be paused to save grid.");
       return;
     } else {
-      this.setState((prevState, props) => {
-        const gridToSave = {
-          gridName: prevState.saveGridAs,
-          grid: currentGrid,
-        };
-        const savedGrids = prevState.savedGrids;
-        const newSavedGrids = [].concat(savedGrids, gridToSave);
-        return { savedGrids: newSavedGrids };
-      });
+      if (this.state.saveGridName === "") {
+        alert("Please enter a name");
+      } else {
+        this.setState((prevState, props) => {
+          const gridToSave = {
+            gridName: prevState.saveGridName,
+            grid: this.state.currentGrid,
+          };
+          const savedGrids = prevState.savedGrids;
+          const newSavedGrids = [].concat(savedGrids, gridToSave);
+          console.log(`Saved grid as: ${this.state.saveGridName}`);
+          return { savedGrids: newSavedGrids };
+        });
+      }
     }
   };
 
+  clearSaved = () => {
+    localStorage.clear();
+    return console.log("Cleared saved layouts...");
+  };
+
   componentDidMount = () => {
-    const savedGrids = JSON.parse(localStorage.getItem("savedGrids"));
+    const retrievedData = localStorage.getItem("savedGrids");
+    const savedGrids = JSON.parse(retrievedData);
     this.setState({ savedGrids: savedGrids }, () =>
       console.log(this.state.savedGrids)
     );
@@ -155,12 +173,13 @@ class Game extends Component {
     const controls = {
       cycles: this.setCycle,
       saveGridAs: this.saveGridAs,
-      selectionLocation: this.setSelection,
+      setSelection: this.setSelection,
       startGame: this.start,
       pauseGame: this.pause,
-      resetGame: this.reset,
+      resetGame: this.resetGame,
       loadGrid: this.loadSaved,
       saveGrid: this.saveGrid,
+      clearSaved: this.clearSaved,
     };
 
     return (
@@ -169,10 +188,27 @@ class Game extends Component {
         onMouseDown={this.mouseDown}
         onMouseUp={this.mouseUp}
       >
-        <Header />
-        <Controls />
-        <Grid />
-        <Modal />
+        <div className="one">
+          <Grid
+            grid={this.state.currentGrid}
+            toggle={this.toggleCell}
+            mouseOver={this.mouseOver}
+          />
+        </div>
+        <div className="two">
+          <Header settingsCallback={this.settingsCallback} />
+          <div className="modal-toggle-wrapper">
+            <button>Settings</button>
+          </div>
+        </div>
+        <Settings
+          settings={this.settingsCallback}
+          cycleCount={this.state.cycles}
+          saveGridAs={this.state.saveGridName}
+          savedGrids={this.state.savedGrids}
+          cycles={this.state.cycles}
+          callBacks={controls}
+        />
       </div>
     );
   }

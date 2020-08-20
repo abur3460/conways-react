@@ -16,4 +16,73 @@ input:-webkit-autofill:active {
 }
 //desktop
 @media only screen and (min-width: 1201px) {
+  .main-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    .header-wrapper {
+      display: flex;
+      margin: 2rem auto;
+      align-items: center;
+      flex-direction: column;
+      .img {
+        background-image: url("../img/logo.png");
+        width: 10rem;
+        height: 10rem;
+        background-size: cover;
+      }
+      h1 {
+        font-size: 3rem;
+      }
+    }
+
+    .gridDiv {
+      margin: auto;
+      width: 90vmin;
+      height: 90vmin;
+      display: grid;
+      grid-template-rows: repeat(50, 1fr);
+      .rowDiv {
+        display: grid;
+        grid-template-columns: repeat(50, 1fr);
+        max-height: calc(90vw / 50);
+      }
+
+      .cellDiv {
+        background-color: green;
+        max-height: calc(90vw / 50);
+        cursor: pointer;
+      }
+
+      .cellDiv {
+        border: 0.1vh solid black;
+        background-color: green;
+        max-height: calc(85vw / 50);
+      }
+
+      .awake {
+        background-color: red;
+      }
+
+      .asleep {
+        background-color: rgb(39, 39, 39);
+      }
+    }
+    .modal-wrapper {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      .settings-modal {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 40vw;
+        height: 70vh;
+        background: rgb(22, 22, 22);
+        color: white;
+        .setting {
+          width: 50%;
+        }
+      }
+    }
+  }
 }

@@ -1,4 +1,4 @@
-function genBlankGrid(xLength, yLength) {
+export function genBlankGrid(xLength = 50, yLength = 50) {
   const rowMaker = () => {
     const cellMaker = () => false;
     const row = Array.from({ length: xLength }, cellMaker);
@@ -12,7 +12,7 @@ function getNeighbors(currentGrid) {
   const neighborGrid = currentGrid.map(function (row, rowIndex, grid) {
     return row.map(function (cell, cellIndex, row) {
       var neighbors = 0;
-      if (rowIndex != 0) {
+      if (rowIndex !== 0) {
         // get above neighbors if not on top row
         if (grid[rowIndex - 1][cellIndex - 1]) {
           neighbors += 1;
@@ -31,7 +31,7 @@ function getNeighbors(currentGrid) {
       if (grid[rowIndex][cellIndex + 1]) {
         neighbors += 1;
       }
-      if (rowIndex != grid.length - 1) {
+      if (rowIndex !== grid.length - 1) {
         // get below neighbors if not on bottom row
         if (grid[rowIndex + 1][cellIndex - 1]) {
           neighbors += 1;
@@ -62,6 +62,10 @@ function genNewGrid(currentGrid, neighborGrid) {
         return true;
       } else if (neighbors === 3 && !alive) {
         return true;
+      } else if (neighbors === 0 && !alive) {
+        return true;
+      } else if (neighbors > 3) {
+        return false;
       } else {
         return false;
       }
@@ -70,14 +74,14 @@ function genNewGrid(currentGrid, neighborGrid) {
   return newGrid;
 }
 
-function genNextGrid(grid) {
+export function genNextGrid(grid) {
   let neighborGrid = getNeighbors(grid);
   return genNewGrid(grid, neighborGrid);
 }
 
-const life = {
-  genBlankGrid,
-  genNextGrid,
-};
+// export const life = {
+//   genBlankGrid,
+//   genNextGrid,
+// };
 
-export default life;
+// export default life;
