@@ -78,10 +78,3 @@ export function genNextGrid(grid) {
   let neighborGrid = getNeighbors(grid);
   return genNewGrid(grid, neighborGrid);
 }
-
-// export const life = {
-//   genBlankGrid,
-//   genNextGrid,
-// };
-
-// export default life;

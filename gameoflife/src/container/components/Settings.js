@@ -2,6 +2,7 @@ import React from "react";
 
 const Settings = (props) => {
   const {
+    setGridSize,
     cycles,
     saveGridAs,
     setSelection,
@@ -13,7 +14,7 @@ const Settings = (props) => {
     clearSaved,
   } = props.callBacks;
 
-  const { cycleValue, saveGridAsValue, savedGrids } = props;
+  const { cycleValue, saveGridAsValue, savedGrids, gridSize } = props;
 
   const options = savedGrids.slice(1).map((savedGrid, index) => {
     return (
@@ -33,8 +34,18 @@ const Settings = (props) => {
     <nav className="settings-wrapper">
       <div className="top">
         <div className="setting-wrapper">
+          {/* <label>Grid Size: </label>
+          <input
+            type="number"
+            className="setting"
+            onChange={setGridSize}
+            value={gridSize}
+          /> */}
+        </div>
+        <div className="setting-wrapper">
           <label htmlFor="cycles">Cycles: </label>
           <input
+            placeholder="50"
             type="number"
             className="setting"
             name="cycles"
@@ -70,16 +81,15 @@ const Settings = (props) => {
         </div>
       </div>
       <div className="bottom">
-        <button className="setting btn" onClick={startGame}>
+        <span className="setting btn start" onClick={startGame}>
           Start
-        </button>
-        <button className="setting btn" onClick={pauseGame}>
+        </span>
+        <span className="setting btn pause" onClick={pauseGame}>
           Pause
-        </button>
-
-        <button className="setting btn" onClick={resetGame}>
+        </span>
+        <span className="setting btn reset" onClick={resetGame}>
           Reset
-        </button>
+        </span>
       </div>
     </nav>
   );

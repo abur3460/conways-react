@@ -27,26 +27,17 @@ input:-webkit-autofill:active {
       flex-direction: column;
       .gridDiv {
         margin: auto;
-        width: 90vmin;
-        height: 90vmin;
+        width: 90vh;
+        height: 90vh;
         display: grid;
-        grid-template-rows: repeat(50, 1fr);
+        grid-template-rows: repeat(auto, 1fr);
         .rowDiv {
           display: grid;
           grid-template-columns: repeat(50, 1fr);
-          max-height: calc(90vw / 50);
-        }
-
-        .cellDiv {
-          background-color: green;
-          max-height: calc(90vw / 50);
-          cursor: pointer;
         }
 
         .cellDiv {
           border: 0.1vh solid black;
-          background-color: green;
-          max-height: calc(85vw / 50);
         }
 
         .awake {
@@ -63,8 +54,11 @@ input:-webkit-autofill:active {
     .right {
       width: 50%;
       height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       .header-wrapper {
-        width: 80%;
+        width: 100%;
         display: flex;
         align-items: center;
         flex-direction: column;
@@ -74,34 +68,59 @@ input:-webkit-autofill:active {
           height: 10rem;
           background-size: cover;
         }
-        h1 {
+        h3 {
           color: white;
           font-size: 3rem;
         }
       }
       .bottom {
         display: flex;
-        margin: 5rem auto;
-        button {
-          margin: 1rem;
+        justify-content: center;
+
+        .btn {
+          background: linear-gradient(110deg, #3a6186, #89253e);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          padding: 1rem;
+          font-size: 1.7rem;
+          cursor: pointer;
+          margin: 2.5rem 1rem;
+          box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+          border: 0.5px solid;
+          border-image-slice: 1;
+          border-image-source: linear-gradient(110deg, #3a6186, #89253e);
+          text-shadow: none;
+          transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .btn:hover {
+          background: white;
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          border: 0.5px solid;
+          box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.226),
+            0 0 20px rgba(255, 255, 255, 0.2);
+          outline-color: rgba(255, 255, 255, 0);
+          outline-offset: 15px;
         }
       }
       .settings-wrapper {
+        margin: 1rem;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        align-content: center;
-        align-items: center;
-        width: 80%;
+        width: 75%;
         height: 40vh;
-        background: rgb(22, 22, 22);
+        background: rgb(39, 39, 39);
         color: white;
         position: relative;
         .setting-wrapper {
           margin: 2rem auto;
           display: flex;
           justify-content: center;
-          width: 80%;
+          width: 95%;
           label {
             white-space: nowrap;
             margin-top: 1rem;

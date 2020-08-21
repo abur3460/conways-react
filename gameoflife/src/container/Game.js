@@ -12,6 +12,7 @@ class Game extends Component {
     const startGrid = genBlankGrid();
 
     this.state = {
+      startGrid: startGrid,
       savedGrids: [],
       saveGridName: "",
       setSelection: null,
@@ -75,6 +76,13 @@ class Game extends Component {
     this.setState({ cycles: e.target.value, currentCycle: e.target.value });
   };
 
+  setGridY = (e) => {
+    this.setState({ gridY: e.target.value });
+  };
+  setGridX = (e) => {
+    this.setState({ gridX: e.target.value });
+  };
+
   setSelection = (e) => {
     this.setState({ setSelection: e.target.value }, () =>
       console.log(this.state.setSelection)
@@ -86,6 +94,8 @@ class Game extends Component {
   };
 
   start = () => {
+    if (this.state.currentCycle === 0)
+      this.setState({ currentCycle: this.state.cycles });
     console.log("Starting game...");
     this.setState({ play: true, cycleCounter: this.state.cycles });
     const id = setInterval(() => {
@@ -121,12 +131,11 @@ class Game extends Component {
       alert("Game must be paused before loading grid");
       return;
     } else {
-      console.log(this.state.setSelection);
-      this.setState((prevState, props) => {
-        const selectGrid = prevState.setSelection;
-        console.log(selectGrid);
-        return { currentGrid: selectGrid.grid };
-      });
+      var grids = JSON.parse(localStorage.getItem("savedGrids"));
+      grids = grids.slice(2);
+      console.log(grids);
+      var grid = grids.find((x) => x.gridName === this.state.setSelection);
+      this.setState({ currentGrid: grid.grid });
     }
   };
 
