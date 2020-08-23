@@ -12,9 +12,16 @@ const Settings = (props) => {
     loadSaved,
     saveGrid,
     clearSaved,
+    setSpeedValue,
   } = props.callBacks;
 
-  const { cycleValue, saveGridAsValue, savedGrids, gridSize } = props;
+  const {
+    cycleValue,
+    speedValue,
+    saveGridAsValue,
+    savedGrids,
+    gridSize,
+  } = props;
 
   const options = savedGrids.slice(1).map((savedGrid, index) => {
     return (
@@ -43,7 +50,7 @@ const Settings = (props) => {
           /> */}
         </div>
         <div className="setting-wrapper">
-          <label htmlFor="cycles">Cycles: </label>
+          <label htmlFor="cycles">Lifecycles: </label>
           <input
             placeholder="50"
             type="number"
@@ -54,31 +61,52 @@ const Settings = (props) => {
           />
         </div>
         <div className="setting-wrapper">
-          <label htmlFor="saved-grid">Choose a saved layout</label>
-          <select className="setting" name="saved-grid" onChange={setSelection}>
-            {options}
-          </select>
-          <button className="setting btn" onClick={loadSaved}>
-            Load
-          </button>
+          <label htmlFor="speed">Lifecycle Time: </label>
+          <input
+            placeholder={speedValue}
+            type="range"
+            className="setting"
+            name="speed"
+            min="1"
+            max="1000"
+            onChange={setSpeedValue}
+            value={speedValue}
+          />
+        </div>
+        <div className="setting-wrapper">
+          <label htmlFor="saved-grid">Choose a saved layout: </label>
+          <div>
+            <select
+              className="setting"
+              name="saved-grid"
+              onChange={setSelection}
+            >
+              {options}
+            </select>
+            <span className="setting btn" onClick={loadSaved}>
+              Load
+            </span>
+          </div>
         </div>
 
         <div className="setting-wrapper">
           <label htmlFor="save-grid-name">Layout Name: </label>
-          <input
-            type="text"
-            className="setting"
-            name="save-grid-name"
-            value={saveGridAsValue}
-            onChange={saveGridAs}
-          />
-          <button className="setting btn" onClick={saveGrid}>
-            Save
-          </button>
-          <button className="setting btn" onClick={clearSaved}>
-            Clear Saved Layouts
-          </button>
+          <div>
+            <input
+              type="text"
+              className="name"
+              name="save-grid-name"
+              value={saveGridAsValue}
+              onChange={saveGridAs}
+            />
+            <span className="setting btn" onClick={saveGrid}>
+              Save
+            </span>
+          </div>
         </div>
+        <span className="clear" onClick={clearSaved}>
+          Clear Saved Layouts
+        </span>
       </div>
       <div className="bottom">
         <span className="setting btn start" onClick={startGame}>
@@ -88,7 +116,7 @@ const Settings = (props) => {
           Pause
         </span>
         <span className="setting btn reset" onClick={resetGame}>
-          Reset
+          Clear
         </span>
       </div>
     </nav>

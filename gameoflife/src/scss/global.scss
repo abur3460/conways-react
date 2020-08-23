@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -25,12 +25,14 @@ input:-webkit-autofill:active {
       height: 100%;
       display: flex;
       flex-direction: column;
+      z-index: 100;
       .gridDiv {
-        margin: auto;
+        margin-left: 4rem;
         width: 90vh;
         height: 90vh;
         display: grid;
         grid-template-rows: repeat(auto, 1fr);
+        position: relative;
         .rowDiv {
           display: grid;
           grid-template-columns: repeat(50, 1fr);
@@ -43,11 +45,53 @@ input:-webkit-autofill:active {
         .awake {
           background: linear-gradient(90deg, #3a6186, #89253e);
           background-attachment: fixed;
-          background-size: 50%;
+          background-size: 60%;
         }
 
         .asleep {
           background-color: rgb(39, 39, 39);
+        }
+      }
+      .gridDiv:before {
+        -webkit-filter: blur(3px);
+        filter: blur(3px);
+        content: "";
+        width: calc(100% + 10px);
+        height: calc(100% + 10px);
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        z-index: -1;
+        background: linear-gradient(110deg, #3a6186, #89253e);
+      }
+    }
+    .center {
+      margin-left: 4rem;
+      h3 {
+        color: rgb(121, 121, 121);
+        text-transform: uppercase;
+        text-align: center;
+      }
+      .presets {
+        .preset {
+          cursor: pointer;
+          width: 10rem;
+          height: 10rem;
+          margin: 1rem;
+          &.gun {
+            background-size: cover;
+            background-image: url("../img/gun.png");
+          }
+          &.face {
+            background-size: cover;
+            background-image: url("../img/face.png");
+          }
+          &.swords {
+            background-size: cover;
+            background-image: url("../img/swords.png");
+          }
+          &.glider {
+          }
         }
       }
     }
@@ -57,6 +101,7 @@ input:-webkit-autofill:active {
       display: flex;
       flex-direction: column;
       align-items: center;
+      z-index: 100;
       .header-wrapper {
         width: 100%;
         display: flex;
@@ -73,11 +118,148 @@ input:-webkit-autofill:active {
           font-size: 3rem;
         }
       }
+      .random {
+        font-weight: bold;
+        background: linear-gradient(110deg, #3a6186, #89253e);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        padding: 1rem;
+        font-size: 1.7rem;
+        cursor: pointer;
+        box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+        border: 0.5px solid;
+        border-image-slice: 1;
+        border-image-source: linear-gradient(110deg, #3a6186, #89253e);
+        text-shadow: none;
+        transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+      }
+
+      .random:hover {
+        background: white;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        border: 0.5px solid white;
+        box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.226),
+          0 0 20px rgba(255, 255, 255, 0.2);
+        outline-color: rgba(255, 255, 255, 0);
+        outline-offset: 15px;
+      }
+      .current-cycle {
+        font-size: 2rem;
+        color: white;
+      }
+
+      .settings-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 75%;
+        height: 40vh;
+        background-color: rgb(39, 39, 39);
+        color: white;
+        position: relative;
+        .setting-wrapper {
+          margin: 1rem auto;
+          display: flex;
+          width: 95%;
+          justify-content: space-between;
+          label {
+            white-space: nowrap;
+            line-height: 1.5rem;
+            margin-right: 2rem;
+          }
+
+          select {
+            margin-right: 1rem;
+            height: 2.3rem;
+            padding-top: 2px;
+          }
+          .name {
+            margin-right: 1rem;
+            height: 1.8rem;
+            padding-top: 2px;
+          }
+
+          .btn {
+            font-weight: bold;
+            background: linear-gradient(110deg, #3a6186, #89253e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 0.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+            border: 0.5px solid;
+            border-image-slice: 1;
+            border-image-source: linear-gradient(110deg, #3a6186, #89253e);
+            text-shadow: none;
+            transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+          }
+
+          .btn:hover {
+            background: white;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border: 0.5px solid white;
+            box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.226),
+              0 0 20px rgba(255, 255, 255, 0.2);
+            outline-color: rgba(255, 255, 255, 0);
+            outline-offset: 15px;
+          }
+        }
+
+        .clear {
+          position: absolute;
+          font-weight: bold;
+          right: 3rem;
+          background: linear-gradient(110deg, #3a6186, #89253e);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          padding: 0.5rem;
+          font-size: 1rem;
+          cursor: pointer;
+          box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+          border: 0.5px solid;
+          border-image-slice: 1;
+          border-image-source: linear-gradient(110deg, #3a6186, #89253e);
+          text-shadow: none;
+          transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .clear:hover {
+          background: white;
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          border: 0.5px solid white;
+          box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.226),
+            0 0 20px rgba(255, 255, 255, 0.2);
+          outline-color: rgba(255, 255, 255, 0);
+          outline-offset: 15px;
+        }
+      }
+      .settings-wrapper:before {
+        -webkit-filter: blur(3px);
+        filter: blur(3px);
+        content: "";
+        width: calc(100% + 10px);
+        height: calc(100% + 10px);
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        z-index: -1;
+        background: linear-gradient(110deg, #3a6186, #89253e);
+      }
       .bottom {
         display: flex;
         justify-content: center;
-
         .btn {
+          font-weight: bold;
           background: linear-gradient(110deg, #3a6186, #89253e);
           -webkit-background-clip: text;
           background-clip: text;
@@ -85,7 +267,7 @@ input:-webkit-autofill:active {
           padding: 1rem;
           font-size: 1.7rem;
           cursor: pointer;
-          margin: 2.5rem 1rem;
+          margin: 2.5rem 1rem 3rem 1.5rem;
           box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
           border: 0.5px solid;
           border-image-slice: 1;
@@ -104,27 +286,6 @@ input:-webkit-autofill:active {
             0 0 20px rgba(255, 255, 255, 0.2);
           outline-color: rgba(255, 255, 255, 0);
           outline-offset: 15px;
-        }
-      }
-      .settings-wrapper {
-        margin: 1rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        width: 75%;
-        height: 40vh;
-        background: rgb(39, 39, 39);
-        color: white;
-        position: relative;
-        .setting-wrapper {
-          margin: 2rem auto;
-          display: flex;
-          justify-content: center;
-          width: 95%;
-          label {
-            white-space: nowrap;
-            margin-top: 1rem;
-          }
         }
       }
     }

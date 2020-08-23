@@ -8,6 +8,16 @@ export function genBlankGrid(xLength = 50, yLength = 50) {
   return blankGrid;
 }
 
+export function genRandomGrid(xLength = 50, yLength = 50) {
+  const rowMaker = () => {
+    const cellMaker = () => Math.random() < 0.15;
+    const row = Array.from({ length: xLength }, cellMaker);
+    return row;
+  };
+  const randomGrid = Array.from({ length: yLength }, rowMaker);
+  return randomGrid;
+}
+
 function getNeighbors(currentGrid) {
   const neighborGrid = currentGrid.map(function (row, rowIndex, grid) {
     return row.map(function (cell, cellIndex, row) {
@@ -61,8 +71,6 @@ function genNewGrid(currentGrid, neighborGrid) {
       } else if (neighbors === 3 && alive) {
         return true;
       } else if (neighbors === 3 && !alive) {
-        return true;
-      } else if (neighbors === 0 && !alive) {
         return true;
       } else if (neighbors > 3) {
         return false;
