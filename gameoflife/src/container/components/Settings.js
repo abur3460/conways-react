@@ -67,7 +67,7 @@ const Settings = (props) => {
             type="range"
             className="setting"
             name="speed"
-            min="1"
+            min="0"
             max="1000"
             onChange={setSpeedValue}
             value={speedValue}
