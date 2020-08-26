@@ -91,6 +91,8 @@ input:-webkit-autofill:active {
             background-image: url("../img/swords.png");
           }
           &.glider {
+            background-size: cover;
+            background-image: url("../img/glider.png");
           }
         }
       }
