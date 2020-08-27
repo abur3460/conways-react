@@ -24,20 +24,18 @@ const Settings = (props) => {
   } = props;
 
   var options = [];
-  setTimeout(() => {
-    var options = savedGrids.slice(1).map((savedGrid, index) => {
-      return (
-        <option value={savedGrid.gridName} key={`sg${index}`}>
-          {savedGrid.gridName}
-        </option>
-      );
-      const defaultOption = (
-        <option value={null} key={`sgDefault`}>
-          Select a grid
-        </option>
-      );
-      options.unshift(defaultOption);
-    }, 1000);
+  options = savedGrids.slice(1).map((savedGrid, index) => {
+    return (
+      <option value={savedGrid.gridName} key={`sg${index}`}>
+        {savedGrid.gridName}
+      </option>
+    );
+    const defaultOption = (
+      <option value={null} key={`sgDefault`}>
+        Select a grid
+      </option>
+    );
+    options.unshift(defaultOption);
   });
 
   return (
