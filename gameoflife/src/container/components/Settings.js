@@ -24,20 +24,19 @@ const Settings = (props) => {
   } = props;
 
   // const options = savedGrids.slice(1).map((savedGrid, index) => {
-  const options = savedGrids.map((savedGrid, index) => {
-    return (
-      <option value={savedGrid.gridName} key={`sg${index}`}>
-        {savedGrid.gridName}
-      </option>
-    );
-  });
+  //   return (
+  //     <option value={savedGrid.gridName} key={`sg${index}`}>
+  //       {savedGrid.gridName}
+  //     </option>
+  //   );
+  // });
 
-  const defaultOption = (
-    <option value={null} key={`sgDefault`}>
-      Select a grid
-    </option>
-  );
-  options.unshift(defaultOption);
+  // const defaultOption = (
+  //   <option value={null} key={`sgDefault`}>
+  //     Select a grid
+  //   </option>
+  // );
+  // options.unshift(defaultOption);
   return (
     <nav className="settings-wrapper">
       <div className="top">
@@ -82,7 +81,7 @@ const Settings = (props) => {
               name="saved-grid"
               onChange={setSelection}
             >
-              {options}
+              {/* {options} */}
             </select>
             <span className="setting btn" onClick={loadSaved}>
               Load
