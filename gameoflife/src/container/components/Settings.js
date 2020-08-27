@@ -23,32 +23,25 @@ const Settings = (props) => {
     gridSize,
   } = props;
 
-  // const options = savedGrids.slice(1).map((savedGrid, index) => {
-  //   return (
-  //     <option value={savedGrid.gridName} key={`sg${index}`}>
-  //       {savedGrid.gridName}
-  //     </option>
-  //   );
-  // });
+  setTimeout(() => {
+    const options = savedGrids.slice(1).map((savedGrid, index) => {
+      return (
+        <option value={savedGrid.gridName} key={`sg${index}`}>
+          {savedGrid.gridName}
+        </option>
+      );
+      const defaultOption = (
+        <option value={null} key={`sgDefault`}>
+          Select a grid
+        </option>
+      );
+      options.unshift(defaultOption);
+    }, 1000);
+  });
 
-  // const defaultOption = (
-  //   <option value={null} key={`sgDefault`}>
-  //     Select a grid
-  //   </option>
-  // );
-  // options.unshift(defaultOption);
   return (
     <nav className="settings-wrapper">
       <div className="top">
-        <div className="setting-wrapper">
-          {/* <label>Grid Size: </label>
-          <input
-            type="number"
-            className="setting"
-            onChange={setGridSize}
-            value={gridSize}
-          /> */}
-        </div>
         <div className="setting-wrapper">
           <label htmlFor="cycles">Lifecycles: </label>
           <input
@@ -81,7 +74,7 @@ const Settings = (props) => {
               name="saved-grid"
               onChange={setSelection}
             >
-              {/* {options} */}
+              {options}
             </select>
             <span className="setting btn" onClick={loadSaved}>
               Load
