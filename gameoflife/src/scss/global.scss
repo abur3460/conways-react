@@ -16,10 +16,107 @@ input:-webkit-autofill:active {
 }
 //desktop
 @media only screen and (min-width: 1201px) {
+  .welcome-modal {
+    z-index: 1000;
+    min-width: 100vw;
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    background: rgb(41, 41, 41);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    h1 {
+      margin: 4rem auto;
+      font-size: 3rem;
+      background: linear-gradient(110deg, #3a6186, #89253e);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .info-wrapper {
+      display: flex;
+      width: 100%;
+      text-align: center;
+
+      .left {
+        font-size: 1.2rem;
+        font-weight: bold;
+        background: linear-gradient(110deg, #3a6186, #89253e);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        border-right: 2px solid;
+        border-image-slice: 1;
+        border-image-source: linear-gradient(170deg, #3a6186, #89253e);
+        width: 50%;
+
+        p {
+          width: 90%;
+          margin: 3rem auto;
+        }
+      }
+      .right {
+        font-weight: bold;
+        font-size: 1.2rem;
+        background: linear-gradient(110deg, #3a6186, #89253e);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        width: 50%;
+        p {
+          margin: 3rem auto;
+          width: 90%;
+        }
+      }
+    }
+    .title {
+      text-align: center;
+      margin: 1rem auto;
+      font-size: 3rem;
+      width: 10rem;
+      background: linear-gradient(110deg, #3a6186, #89253e);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .btn {
+      margin: 5rem auto;
+      width: 12rem;
+      text-align: center;
+      font-weight: bold;
+      background: linear-gradient(110deg, #3a6186, #89253e);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      padding: 1rem;
+      font-size: 1.7rem;
+      cursor: pointer;
+      box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+      border: 0.5px solid;
+      border-image-slice: 1;
+      border-image-source: linear-gradient(110deg, #3a6186, #89253e);
+      text-shadow: none;
+      transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .btn:hover {
+      background: white;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      border: 0.5px solid white;
+      box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.226),
+        0 0 20px rgba(255, 255, 255, 0.2);
+      outline-color: rgba(255, 255, 255, 0);
+      outline-offset: 15px;
+    }
+  }
   .main-wrapper {
     display: flex;
     justify-content: space-evenly;
     margin-top: 2%;
+
     .left {
       width: 50%;
       height: 100%;

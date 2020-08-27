@@ -21,6 +21,7 @@ class Game extends Component {
       currentGrid: startGrid,
       play: false,
       mouseDown: false,
+      modal: true,
       settings: false,
       presets: [
         [
@@ -10606,6 +10607,10 @@ class Game extends Component {
     localStorage.setItem("savedGrids", JSON.stringify(this.state.savedGrids));
   };
 
+  hideModal = () => {
+    this.setState({ modal: false });
+  };
+
   render() {
     const controls = {
       cycles: this.setCycle,
@@ -10617,77 +10622,122 @@ class Game extends Component {
       loadSaved: this.loadSaved,
       saveGrid: this.saveGrid,
       clearSaved: this.clearSaved,
-      toggleModal: this.toggleModal,
       setSpeedValue: this.setSpeedValue,
     };
 
     return (
-      <div
-        className="main-wrapper"
-        onMouseDown={this.mouseDown}
-        onMouseUp={this.mouseUp}
-      >
-        <div className="left">
-          <Grid
-            grid={this.state.currentGrid}
-            toggle={this.toggleCell}
-            mouseOver={this.mouseOver}
-          />
-        </div>
-        <div className="center">
-          <h3>Presets</h3>
-          <div className="presets">
-            <div
-              className="preset gun"
-              onClick={() => {
-                this.setPreset(0);
-              }}
-            ></div>
-            <div
-              className="preset face"
-              onClick={() => {
-                this.setPreset(1);
-              }}
-            ></div>
-            <div
-              className="preset swords"
-              onClick={() => {
-                this.setPreset(2);
-              }}
-            ></div>
-            <div
-              className="preset glider"
-              onClick={() => {
-                this.setPreset(3);
-              }}
-            ></div>
-          </div>
-        </div>
-        <div className="right">
-          <Header settingsCallback={this.settingsCallback} />
-          <div
-            className="random"
-            onClick={() => {
-              this.setRandomGrid();
-            }}
-          >
-            Generate Random Grid
-          </div>
-          <p className="current-cycle">
-            Current Lifecycle: {this.state.currentCycle}
-          </p>
+      <main>
+        {this.state.modal ? (
+          <div className="welcome-modal">
+            <h1>Welcome to Conway's Game of Life</h1>
+            <div className="info-wrapper">
+              <div className="left">
+                <div className="title">Rules</div>
 
-          <Settings
-            settings={this.settingsCallback}
-            cycleCount={this.state.cycles}
-            saveGridAs={this.state.saveGridName}
-            savedGrids={this.state.savedGrids}
-            cycles={this.state.cycles}
-            callBacks={controls}
-            speedValue={this.state.speed}
-          />
+                <p className="rule">
+                  Any live cell with two or three live neighbours survives
+                </p>
+                <p className="rule">
+                  Any dead cell with three live neighbours becomes a live cell.
+                </p>
+                <p className="rule">
+                  All other live cells die in the next generation. Similarly,
+                  all other dead cells stay dead.
+                </p>
+              </div>
+              <div className="right">
+                <div className="title">About</div>
+                <p className="info">
+                  Conway's Game of Life was invented in 1970 by British
+                  mathematician John Horton Conway.
+                </p>
+                <p className="info">
+                  To interact with the Game of Life, one sets a configuration of
+                  alive and dead cells on a grid and observes how it evolves.
+                </p>
+                <p className="info">
+                  This rendition includes a few premade patterns to enjoy, as
+                  well as a randomizer for quick simulations.
+                </p>
+              </div>
+            </div>
+            <span
+              className="btn"
+              onClick={() => {
+                this.hideModal();
+              }}
+            >
+              Get Started
+            </span>
+          </div>
+        ) : null}
+        <div
+          className="main-wrapper"
+          onMouseDown={this.mouseDown}
+          onMouseUp={this.mouseUp}
+        >
+          <div className="left">
+            <Grid
+              grid={this.state.currentGrid}
+              toggle={this.toggleCell}
+              mouseOver={this.mouseOver}
+            />
+          </div>
+          <div className="center">
+            <h3>Presets</h3>
+            <div className="presets">
+              <div
+                className="preset gun"
+                onClick={() => {
+                  this.setPreset(0);
+                }}
+              ></div>
+              <div
+                className="preset face"
+                onClick={() => {
+                  this.setPreset(1);
+                }}
+              ></div>
+              <div
+                className="preset swords"
+                onClick={() => {
+                  this.setPreset(2);
+                }}
+              ></div>
+              <div
+                className="preset glider"
+                onClick={() => {
+                  this.setPreset(3);
+                }}
+              ></div>
+            </div>
+          </div>
+          <div className="right">
+            <Header settingsCallback={this.settingsCallback} />
+            <div
+              className="random"
+              onClick={() => {
+                this.setRandomGrid();
+              }}
+            >
+              Generate Random Grid
+            </div>
+            <p className="current-cycle">
+              Current Lifecycle: {this.state.currentCycle}
+            </p>
+
+            <Settings
+              settings={this.settingsCallback}
+              cycleCount={this.state.cycles}
+              saveGridAs={this.state.saveGridName}
+              savedGrids={this.state.savedGrids}
+              cycles={this.state.cycles}
+              callBacks={controls}
+              speedValue={this.state.speed}
+            />
+          </div>
         </div>
-      </div>
+      </main>
     );
   }
 }
