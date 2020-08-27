@@ -23,7 +23,8 @@ const Settings = (props) => {
     gridSize,
   } = props;
 
-  const options = savedGrids.slice(1).map((savedGrid, index) => {
+  // const options = savedGrids.slice(1).map((savedGrid, index) => {
+  const options = savedGrids.map((savedGrid, index) => {
     return (
       <option value={savedGrid.gridName} key={`sg${index}`}>
         {savedGrid.gridName}
