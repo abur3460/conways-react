@@ -13,6 +13,7 @@ const Settings = (props) => {
     saveGrid,
     clearSaved,
     setSpeedValue,
+    nextLife,
   } = props.callBacks;
 
   const {
@@ -106,6 +107,9 @@ const Settings = (props) => {
         </span>
         <span className="setting btn pause" onClick={pauseGame}>
           Pause
+        </span>
+        <span className="setting btn next" onClick={nextLife}>
+          Next
         </span>
         <span className="setting btn reset" onClick={resetGame}>
           Clear

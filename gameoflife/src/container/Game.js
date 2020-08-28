@@ -10589,6 +10589,11 @@ class Game extends Component {
     }
   };
 
+  nextLife = () => {
+    this.lifecycle();
+    this.setState({ currentCycle: this.state.currentCycle - 1 });
+  };
+
   clearSaved = () => {
     window.localStorage.clear();
     localStorage.clear();
@@ -10623,6 +10628,7 @@ class Game extends Component {
       saveGrid: this.saveGrid,
       clearSaved: this.clearSaved,
       setSpeedValue: this.setSpeedValue,
+      nextLife: this.nextLife,
     };
 
     return (
