@@ -2,7 +2,6 @@ import React from "react";
 
 const Settings = (props) => {
   const {
-    setGridSize,
     cycles,
     saveGridAs,
     setSelection,
@@ -16,16 +15,9 @@ const Settings = (props) => {
     nextLife,
   } = props.callBacks;
 
-  const {
-    cycleValue,
-    speedValue,
-    saveGridAsValue,
-    savedGrids,
-    gridSize,
-  } = props;
+  const { cycleValue, speedValue, saveGridAsValue, savedGrids } = props;
 
-  var options = [{ test1: [] }, { test2: [] }];
-  options = savedGrids.slice(1).map((savedGrid, index) => {
+  var options = savedGrids.slice(0).map((savedGrid, index) => {
     return (
       <option value={savedGrid.gridName} key={`sg${index}`}>
         {savedGrid.gridName}

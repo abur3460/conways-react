@@ -10,7 +10,7 @@ export function genBlankGrid(xLength = 50, yLength = 50) {
 
 export function genRandomGrid(xLength = 50, yLength = 50) {
   const rowMaker = () => {
-    const cellMaker = () => Math.random() < Math.random();
+    const cellMaker = () => Math.random() < 0.2;
     const row = Array.from({ length: xLength }, cellMaker);
     return row;
   };
