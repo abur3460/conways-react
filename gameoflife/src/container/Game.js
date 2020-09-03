@@ -181,6 +181,7 @@ class Game extends Component {
 
   clearSaved = () => {
     localStorage.clear();
+    this.setState({ savedGrids: [] });
     console.log("Cleared saved layouts...");
   };
 
